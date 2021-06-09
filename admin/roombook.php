@@ -463,7 +463,7 @@ if(!isset($_SESSION["user"]))
 							
 							if($st=="Confirm")
 							{
-									$urb = "UPDATE `roombook` SET `stat`='$st','NRoom'=$room WHERE id = '$id'";
+									$urb = "UPDATE `roombook` SET stat='$st', NRoom ='$room' WHERE id = '$id'";
 									
 								if($f1=="NO" )
 								{
