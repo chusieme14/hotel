@@ -35,9 +35,6 @@ if(!isset($_SESSION["user"]))
 					$cout = $row['cout'];
 					$sta = $row['stat'];
 					$days = $row['nodays'];
-					
-				
-				
 				}
 					
 					
@@ -490,20 +487,20 @@ if(!isset($_SESSION["user"]))
 												 $type_of_room = 0;       
 														if($troom=="Superior Room")
 														{
-															$type_of_room = 320;
+															$type_of_room = 3200;
 														
 														}
 														else if($troom=="Deluxe Room")
 														{
-															$type_of_room = 220;
+															$type_of_room = 2200;
 														}
 														else if($troom=="Guest House")
 														{
-															$type_of_room = 180;
+															$type_of_room = 1800;
 														}
 														else if($troom=="Single Room")
 														{
-															$type_of_room = 150;
+															$type_of_room = 1500;
 														}
 														
 														

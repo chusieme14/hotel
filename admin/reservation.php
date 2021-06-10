@@ -90,7 +90,7 @@
                         </div>
                         
                     </div>
-                </div>
+            </div>
                 
                   
             <div class="row">
@@ -109,7 +109,7 @@
                                         <option value="Guest House">GUEST HOUSE</option>
                                         <option value="Single Room">SINGLE ROOM</option>
                                     </select>
-                              </div>
+                                </div>
 							  <div class="form-group">
                                     <label>Bedding Type</label>
                                     <select name="bed" class="form-control" required>
@@ -160,7 +160,7 @@
                        </div>
                         
                     </div>
-                </div>
+            </div>
 				
 				
                 <div class="col-md-12 col-sm-12">
@@ -182,7 +182,7 @@
                                 }
                                 else{
                                     
-                                    $con=mysqli_connect("localhost","capfrance",'$Capfrance1234',"hotel");
+                                    $con=mysqli_connect("localhost","root","","hotel");
                                     $check="SELECT * FROM roombook WHERE email = '$_POST[email]'";
                                     $rs = mysqli_query($con,$check);
                                     $data = mysqli_fetch_array($rs, MYSQLI_NUM);

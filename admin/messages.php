@@ -134,6 +134,12 @@ if(!isset($_SESSION["user"]))
 										<form method="post">
                                         <div class="modal-body">
                                             <div class="form-group">
+                                            <label>To:</label>
+                                            <input name="to" class="form-control" placeholder="Enter Email Address">
+											</div>
+										</div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
                                             <label>Title</label>
                                             <input name="title" class="form-control" placeholder="Enter Title">
 											</div>
@@ -153,28 +159,44 @@ if(!isset($_SESSION["user"]))
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 											
-                                           <input type="submit" name="log" value="Send" class="btn btn-primary">
+                                           <input type="submit" name="log1" value="Send" class="btn btn-primary">
 										  </form>
+
+                                          <?php
+                                                require '../PHPMailer/PHPMailerAutoload.php';
+                                                
+                                                if(isset($_POST['log1'])){
+                                                    $mail = new PHPMailer();
+                                                    $mail->isSMTP();
+                                                    $mail->Host = "smtp.gmail.com";
+                                                    $mail->SMTPAuth = true;
+                                                    $mail->SMTPSecure = "ssl";
+                                                    $mail->Port = 465;
+                                                    $mail->isHTML();
+                                                    $mail->Username = "hoteljn27@gmail.com";
+                                                    $mail->Password = "3jnhotelsystem";
+                                                    $mail->Subject = $_POST['subject'];
+                                                    $mail->SetFrom("hoteljn27@gmail.com");
+                                                    $mail->Body = $_POST['news'];
+                                                    $mail->AddAddress($_POST['to']);
+                                                    
+                                                    // echo '<script>alert("Email not Sent") </script>';
+                                                    if($mail->Send()){
+                                                        echo '<script>alert("Email Sent Successfully") </script>' ;
+                                                    }
+                                                    else{
+                                                        echo '<script>alert("Email not Sent") </script>' ;
+                                                    }
+
+                                                    // $email->smtpClosed();
+                                                }
+                                            ?>
 										   
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-							<?php
-							if(isset($_POST['log']))
-							{	
-								$log ="INSERT INTO `newsletterlog`(`title`, `subject`, `news`) VALUES ('$_POST[title]','$_POST[subject]','$_POST[news]')";
-								if(mysqli_query($con,$log))
-								{
-									echo '<script>alert("New Room Added") </script>' ;
-											
-								}
-								
-							}
-							
-								
-							?>
                           
                         </p>
 						
@@ -286,3 +308,4 @@ if(!isset($_SESSION["user"]))
    
 </body>
 </html>
+
