@@ -117,8 +117,10 @@ if(!isset($_SESSION["user"]))
 											<th>No of Room</th>
                                             <th>Room Rent</th>
 											<th>Bed Rent</th>
+											<th>Bed Rent</th>
 											<th>Gr.Total</th>
 											<th>Print</th>
+											<th>Download</th>
                                             
                                         </tr>
                                     </thead>
@@ -147,6 +149,7 @@ if(!isset($_SESSION["user"]))
 													<td>".$row['btot']."</td>
 													<td>".$row['fintot']."</td>
 													<td><a href=print.php?pid=".$id ." <button class='btn btn-primary'> <i class='fa fa-print' ></i> Print</button></td>
+													<td><a href=download.php?pid=".$id ." <button class='btn btn-success'> <i class='fa fa-download' ></i> Download</button></td>
 													</tr>";
 											}
 											else
@@ -163,6 +166,7 @@ if(!isset($_SESSION["user"]))
 													<td>".$row['btot']."</td>
 													<td>".$row['fintot']."</td>
 													<td><a href=print.php?pid=".$id ." <button class='btn btn-primary'> <i class='fa fa-print' ></i>  Print</button></td>
+													<td><a href=download.php?pid=".$id ." <button class='btn btn-success'> <i class='fa fa-download' ></i>  Download</button></td>
 													</tr>";
 											
 											}
