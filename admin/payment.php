@@ -105,7 +105,6 @@ if(!isset($_SESSION["user"]))
                         <div class="panel-body">
                             <div class="table-responsive">
                             <input id="myBtn" type="submit"  name="add_payment" value="ADD PAYMENT" class="btn btn-primary">
-                            <input type="submit"  name="generate_pdf" value="Create PDF" class="btn btn-primary">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
@@ -324,39 +323,40 @@ if(!isset($_SESSION["user"]))
 include('db.php');
 if(isset($_POST['add']))
 {
+    $new = 'Not Conform';
     $con=mysqli_connect("localhost","root","","hotel");
     $addedPayment="INSERT INTO `roombook`(`Title`, `FName`, `LName`, `Email`, `National`, `Country`, `Phone`, `TRoom`, `Bed`, `NRoom`, `Meal`, `cin`, `cout`,`stat`,`nodays`) VALUES 
     ('$_POST[title]','$_POST[fname]','$_POST[lname]','$_POST[email]','$_POST[nation]','$_POST[country]','$_POST[phone]','$_POST[troom]','$_POST[bed]','$_POST[nroom]','$_POST[meal]','$_POST[cin]','$_POST[cout]','$new',datediff('$_POST[cout]','$_POST[cin]'))";
-    if (mysqli_query($con,$addedPayment))
+    $query = mysqli_query($con,$addedPayment);
+    
+    if ($query)
     {
-        $sql ="Select * from roombook where email = '$_POST[email]' and name = '$_POST[name]'";
-
-				$re = mysqli_query($con,$sql);
-				
-					$title = $_POST['title'];
-					$fname = $_POST['fname'];
-					$lname = $_POST['lname'];
-					$email = $_POST['email'];
-					$Phone = $_POST['phone'];
-					$troom = $_POST['troom'];
-					$nroom = $_POST['nroom'];
-					$bed = $_POST['bed'];
-					$non = $_POST['nroom'];
-					$cin = $_POST['cin'];
-					$cout = $_POST['cout'];
-					$sta = $_POST['stat'];
-					$days = datediff("'$_POST[cout]'","'$_POST[cin]'");
+        echo '<script>alert('.$query.') </script>';
+        $sql ="select * from roombook order by id desc limit 1";
+        $re = mysqli_query($con,$sql);
+        while($row=mysqli_fetch_array($re))
+        {
+            $title = $row['Title'];
+            $fname = $row['FName'];
+            $lname = $row['LName'];
+            $email = $row['Email'];
+            $Phone = $row['Phone'];
+            $troom = $row['TRoom'];
+            $nroom = $row['NRoom'];
+            $bed = $row['Bed'];
+            $non = $row['NRoom'];
+            $cin = $row['cin'];
+            $cout = $row['cout'];
+            $sta = $row['stat'];
+            $days = $row['nodays'];
+        }
 				
 
         $new = "Confirm";
-            
-        if($new=="Confirm")
-        {
         $urb = "UPDATE `roombook` SET stat='$new', NRoom ='$_POST[nroom]' WHERE email = '$_POST[email]'";
         
             if( mysqli_query($con,$urb))
                 {	
-                    echo '<script>alert("Email not Sent") </script>';
                     //echo "<script type='text/javascript'> alert('Guest Room booking is conform')</script>";
                     //echo "<script type='text/javascript'> window.location='home.php'</script>";
                         $type_of_room = 0;       
@@ -435,9 +435,6 @@ if(isset($_POST['add']))
                             }
                     
             }
-                
-                    
-        }
         echo "<script type='text/javascript'> alert('Payment has been added')</script>";
     }
     else
